@@ -1,0 +1,36 @@
+body {
+
+}
+
+main {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+	width: 95vw;
+	height: 500px;
+	background: orange;
+}
+
+.searchContainer {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+	width: 95%;
+	height: 50%;
+	background: lightblue;
+	border: 1px solid black;
+
+}
+
+.listContainer {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+	width: 95%;
+	height: 50%;
+	background: lightgreen;
+	border: 1px solid black;
+}
