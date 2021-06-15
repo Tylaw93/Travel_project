@@ -1,5 +1,8 @@
 body {
-
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
 }
 
 main {
@@ -10,6 +13,10 @@ main {
 	width: 95vw;
 	height: 500px;
 	/* background: orange; */
+}
+
+h1 {
+	text-align: center;
 }
 
 .searchContainer {
