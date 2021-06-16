@@ -1,1 +1,44 @@
-@import 'https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css';
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css";
+
+body {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 95vw;
+  height: 500px;
+  /* background: orange; */
+}
+
+h1 {
+  text-align: center;
+}
+
+.searchContainer {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  height: 50%;
+  background: lightblue;
+  /* border: 1px solid black; */
+}
+
+.listContainer {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  height: 50%;
+  background: lightgreen;
+  /* border: 1px solid black; */
+}
