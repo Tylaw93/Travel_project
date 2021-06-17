@@ -22,9 +22,9 @@ function getCityName(params) {
       // eslint-disable-next-line no-undef
       const map = new mapboxgl.Map({
         container: "map", // container ID
-        style: "mapbox://styles/mapbox/streets-v11", // style URL
+        style: "mapbox://styles/mapbox/light-v10", // style URL
         center: [data.lon, data.lat], // starting position [lng, lat]
-        zoom: 9, // starting zoom
+        zoom: 10, // starting zoom
       });
     });
 }
