@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable prefer-const */
 const apikey = "5ae2e3f221c38a28845f05b63b141ff8b556302ea945abb40cb4ffe1";
 // eslint-disable-next-line no-undef
 // const cityName = "St. Louis";
@@ -22,9 +24,13 @@ function getCityName(params) {
       // eslint-disable-next-line no-undef
       const map = new mapboxgl.Map({
         container: "map", // container ID
-        style: "mapbox://styles/mapbox/light-v10", // style URL
+        style: "mapbox://styles/mapbox/streets-v11", // style URL
         center: [data.lon, data.lat], // starting position [lng, lat]
         zoom: 10, // starting zoom
+      });
+      let popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false,
       });
     });
 }
