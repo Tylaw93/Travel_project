@@ -7,19 +7,19 @@
       href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
       rel="stylesheet"
     />
-    <link
+    <!-- <link
       href="https://unpkg.com/ionicons@4.5.5/dist/css/ionicons.min.css"
       rel="stylesheet"
-    />
+    /> -->
     <link rel="stylesheet" href="./assets/css/style.css" />
 
     <title>Museum Hunter</title>
   </head>
 
   <body class="w-screen flex flex-col items-center">
-    <header class="w-full pb-12" id="top">
+    <header class="w-full" id="top">
       <!-- begin navigation -->
-      <nav class="flex flex-col w-full relative">
+      <nav class="flex flex-col w-full">
         <div class="flex flex-row justify-between items-center">
           <a href="#top" class="self-start w-12"
             ><img
@@ -28,10 +28,11 @@
               class="w-12"
           /></a>
           <h1 class="text-xl font-semibold">Museum Hunter</h1>
-          <i class="ion-md-menu pr-4" id="jsnav-toggle"></i>
+          <!-- <i class="ion-md-menu pr-4" id="jsnav-toggle"></i> -->
+          <ion-icon name="menu" class="pr-4" id="jsnav-toggle"></ion-icon>
         </div>
         <div
-          class="hidden flex flex-col items-end pr-4 relative right-0 top-100"
+          class="invisible flex flex-col items-end pr-4"
           id="jsmenu"
         >
           <a href="" class="">Search</a>
@@ -48,7 +49,7 @@
           id="searchForm"
           class="flex flex-row justify-between items-center py-4"
         >
-          <label for="city">
+          <label for="city"></label>
             <input
               type="text"
               id="city"
@@ -77,7 +78,12 @@
         <br />
         <div class="pinLocationData">
           <!-- modal -->
+          <!-- <ion-icon name="star-outline"></ion-icon>
+          <ion-icon name="star"></ion-icon> -->
+          <!-- <ion-icon name="heart-outline"></ion-icon>
+          <ion-icon name="heart-outline"></ion-icon> -->
           <!-- Name, lat/long, brief desc -->
+          <!-- text-red-500 -->
           <img id="locationData" src="" alt="location data" />
         </div>
       </section>
@@ -86,7 +92,9 @@
         <img id="weather" src="" alt="weather" />
       </section>
     </main>
-    <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <!-- <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script> -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <!-- <script src="./assets/js/weather.js"></script>
     <script src="./assets/js/script.js"></script> -->
     <script src="./assets/js/main.js"></script>
