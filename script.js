@@ -7,45 +7,22 @@ const apikey = "5ae2e3f221c38a28845f05b63b141ff8b556302ea945abb40cb4ffe1";
 
 document.addEventListener("submit", getCityName);
 
-function getLocalAttractions(data) {
-  const atttractions = `https://api.opentripmap.com/0.1/en/places/radius?radius=200&lon=${data.lon}&${data.lat}&apikey=${apikey}`;
+function getLocalAttractions(data, map) {
+  console.log(data);
+  const atttractions = `https://api.opentripmap.com/0.1/en/places/radius?radius=2000&lon=${data.lon}&lat=${data.lat}&apikey=${apikey}`;
   fetch(atttractions)
     .then(function (response) {
       return response.json();
     })
     .then(function (museums) {
       console.log(museums);
-    });
-}
-function getCityName(params) {
-  const cityName = document.querySelector("#city").value;
-  // eslint-disable-next-line no-undef
-  const getLatLon = `https://api.opentripmap.com/0.1/en/places/geoname?name=${cityName}&apikey=${apikey}`;
-  fetch(getLatLon)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      console.log(data);
-      // eslint-disable-next-line no-undef
-      mapboxgl.accessToken =
-        "pk.eyJ1IjoidHlsYXc5MyIsImEiOiJja3B1N3hyeG8wdmRxMnVvNnNxa2VuaG5iIn0.lMBPEZ7KGl2Y2nJk0u1RDQ";
-      // eslint-disable-next-line no-undef
-      // eslint-disable-next-line no-unused-vars
-      // eslint-disable-next-line prefer-const
-      // eslint-disable-next-line no-undef
-      const map = new mapboxgl.Map({
-        container: "map", // container ID
-        style: "mapbox://styles/mapbox/streets-v11", // style URL
-        center: [data.lon, data.lat], // starting position [lng, lat]
-        zoom: 10, // starting zoom
-      });
-      fetch();
+
       map.on("load", function () {
         map.addSource("places", {
           type: "geojson",
-          data: { data },
+          data: museums,
         });
+
         // Add a layer showing the places.
         map.addLayer({
           id: "places",
@@ -70,7 +47,7 @@ function getCityName(params) {
           map.getCanvas().style.cursor = "pointer";
 
           let coordinates = e.features[0].geometry.coordinates.slice();
-          let description = e.features[0].properties.description;
+          let description = e.features[0].properties.name;
 
           // Ensure that if the map is zoomed out such that multiple
           // copies of the feature are visible, the popup appears
@@ -89,5 +66,33 @@ function getCityName(params) {
           popup.remove();
         });
       });
+    });
+}
+
+function getCityName(params) {
+  const cityName = document.querySelector("#city").value;
+  // eslint-disable-next-line no-undef
+  const getLatLon = `https://api.opentripmap.com/0.1/en/places/geoname?name=${cityName}&apikey=${apikey}`;
+
+  fetch(getLatLon)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      // eslint-disable-next-line no-undef
+      mapboxgl.accessToken =
+        "pk.eyJ1IjoidHlsYXc5MyIsImEiOiJja3B1N3hyeG8wdmRxMnVvNnNxa2VuaG5iIn0.lMBPEZ7KGl2Y2nJk0u1RDQ";
+      // eslint-disable-next-line no-undef
+      // eslint-disable-next-line no-unused-vars
+      // eslint-disable-next-line prefer-const
+      // eslint-disable-next-line no-undef
+      const map = new mapboxgl.Map({
+        container: "map", // container ID
+        style: "mapbox://styles/mapbox/streets-v11", // style URL
+        center: [data.lon, data.lat], // starting position [lng, lat]
+        zoom: 13, // starting zoom
+      });
+      getLocalAttractions(data, map);
     });
 }
