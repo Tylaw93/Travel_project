@@ -3,34 +3,92 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/ionicons@4.5.5/dist/css/ionicons.min.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./assets/css/style.css" />
 
-    <title>Travelling Attractions</title>
+    <title>Museum Hunter</title>
   </head>
-  <body>
-    <h1>Travelling Attractions</h1>
-    <nav></nav>
-    <main>
-      <section class="searchContainer">
-        <form action="#" id="searchForm">
 
-          <label for="city"></label>
-          <input type="text" id="city" placeholder="Enter a city here..."><br>
-          <input type="checkbox" id="museum" name="museum" value="museum">
-          <label for="museum"> Museums</label><br>
-          <input type="checkbox" id="park" name="park" value="park">
-          <label for="park"> Parks</label><br>
-          <input type="checkbox" id="venue" name="venue" value="venue">
-          <label for="venue"> Concert Venue</label><br>
-          <button type="submit" id="searchFormBtn" class="btn">Submit</button>
+  <body class="w-screen flex flex-col items-center">
+    <header class="w-full pb-12" id="top">
+      <!-- begin navigation -->
+      <nav class="flex flex-col w-full relative">
+        <div class="flex flex-row justify-between items-center">
+          <a href="#top" class="self-start w-12"
+            ><img
+              src="./assets/img/d3Logo.png"
+              alt="D3 Logo 'Dynamic Duo Development"
+              class="w-12"
+          /></a>
+          <h1 class="text-xl font-semibold">Museum Hunter</h1>
+          <i class="ion-md-menu pr-4" id="jsnav-toggle"></i>
+        </div>
+        <div
+          class="hidden flex flex-col items-end pr-4 relative right-0 top-100"
+          id="jsmenu"
+        >
+          <a href="" class="">Search</a>
+          <a href="" class="">Favorite Destinations</a>
+        </div>
+      </nav>
+      <!-- end navigation -->
+    </header>
+
+    <main class="flex flex-col justify-center items-center gap-4 w-11/12 pb-4">
+      <section id="searchContainer" class="flex flex-col">
+        <form
+          action="#"
+          id="searchForm"
+          class="flex flex-row justify-between items-center py-4"
+        >
+          <label for="city">
+            <input
+              type="text"
+              id="city"
+              class="border-black bg-gray-200 placeholder-gray-700"
+              placeholder="Enter a city here..."
+            />
+          </label>
+          <button
+            type="submit"
+            id="searchFormBtn"
+            class="
+              py-2
+              px-4
+              font-semibold
+              rounded-2xl
+              bg-blue-300
+              active:bg-blue-500
+            "
+          >
+            Submit
+          </button>
         </form>
+        <div class="map">
+          <img id="map" src="" alt="city map" class="w-300px h-300px" />
+        </div>
+        <br />
+        <div class="pinLocationData">
+          <!-- modal -->
+          <!-- Name, lat/long, brief desc -->
+          <img id="locationData" src="" alt="location data" />
+        </div>
       </section>
-      <section class="listContainer"></section>
+
+      <section class="weatherData">
+        <img id="weather" src="" alt="weather" />
+      </section>
     </main>
-
-
-
-    <script src="./assets/js/main.js" type="module"></script>
+    <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <!-- <script src="./assets/js/weather.js"></script>
+    <script src="./assets/js/script.js"></script> -->
+    <script src="./assets/js/main.js"></script>
   </body>
 </html>
