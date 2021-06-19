@@ -72,10 +72,16 @@
           </form>
 
         </section>
-        <div id="mapContainer" class="flex flex-row justify-center items-center width-11/12">
-        <div id="map" style="width: 350px; height: 350px" >
-          <!-- MAP DATA RENDERS HERE -->
-        </div></div>
+        <div id="mapContainer" class="flex flex-col justify-center items-center width-11/12">
+          <div id="map" style="width: 350px; height: 350px" >
+            <!-- CITY MAP DATA RENDERS HERE -->
+          </div>
+          <div id="locationData" class="flex flex-row justify-center items-center">
+            <!-- LOCATION IMG, DESC RENDERS HERE -->
+            <div id="locationImg" class="flex flex-row justify-center items-center"></div>
+            <div id="locationDesc" class="flex flex-row"></div>
+          </div>
+        </div>
         <br>
         <section id="forecast" class="weatherData flex flex-col justify-center items-center w-full">
           <div id="currentForecast" class="flex flex-row justify-evenly items-center bg-gray-300 w-4/5 mb-4 rounded-2xl"></div>
