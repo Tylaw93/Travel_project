@@ -30,6 +30,7 @@ function latLongFetch(city) {
 }
 
 function renderWeather(coords) {
+  currentForecast.innerHTML = "";
   const lat = coords[0];
   const lon = coords[1];
   const weatherReqURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=current,minutely,hourly,alerts&appid=${myKey}`;
@@ -39,54 +40,77 @@ function renderWeather(coords) {
     })
     .then(function (data) {
       console.log(data);
+      // LEFT SIDE CONTAINER
+      const left = document.createElement("div");
+      left.classList.add("flex");
+      left.classList.add("flex-col");
+      left.classList.add("justify-evenly");
+      left.classList.add("items-center");
+      left.classList.add("py-1");
+      left.classList.add("w-2/5");
       // 'TODAY' RENDER
       const today = document.createElement("p");
       today.classList.add("font-semibold");
       today.innerText = "TODAY";
-      currentForecast.appendChild(today);
+      left.appendChild(today);
       // CITY NAME RENDER
       const city = document.createElement("p");
       city.classList.add("font-bold");
       city.innerText = currCity;
-      currentForecast.appendChild(city);
+      left.appendChild(city);
       // CURRENT CONDITIONS RENDER
-      // APPEND CONDITION ICON TO DIV
       const fIcon = document.createElement("img");
       const fIconSrc = data.daily[0].weather[0].icon;
       const fIconAlt = data.daily[0].weather[0].description;
       fIcon.src = `http://openweathermap.org/img/wn/${fIconSrc}.png`;
       fIcon.alt = fIconAlt;
       fIcon.class = "forecastIcon";
-      currentForecast.appendChild(fIcon);
+      left.appendChild(fIcon);
+      currentForecast.appendChild(left);
 
-      // CONVERT AND RENDER DATE
+      // RIGHT SIDE CONTAINER
+      const right = document.createElement("div");
+      right.classList.add("flex");
+      right.classList.add("flex-col");
+      right.classList.add("justify-between");
+      right.classList.add("items-center");
+      right.classList.add("py-1");
+      right.classList.add("w-2/5");
+      right.classList.add("gap-1");
+      // APPEND TEMP
+      const temp = document.createElement("p");
+      temp.innerHTML = `Temp: ${data.daily[0].temp.day}&deg; F`;
+      right.appendChild(temp);
+      // APPEND HUMIDITY
+      const humid = document.createElement("p");
+      humid.innerText = `Humidity: ${data.daily[0].humidity}%`;
+      right.appendChild(humid);
+      // APPEND UVI
+      const uvi = document.createElement("p");
+      const uvValue = data.daily[0].uvi;
+      let uvColor = "";
+      if (uvValue < 3) {
+        // for uvindex of 0-2
+        uvColor = "uvLow";
+      } else if (uvValue >= 3 && uvValue < 6) {
+        // for uvindex of 3-5
+        uvColor = "uvModerate";
+      } else if (uvValue >= 6 && uvValue < 8) {
+        // for uvindex of 6-7
+        uvColor = "uvHigh";
+      } else if (uvValue >= 8 && uvValue < 11) {
+        // for uvindex of 8-10
+        uvColor = "uvVeryHigh";
+      } else {
+        // for uvindex of 11+
+        uvColor = "uvExtreme";
+      }
+      uvi.innerHTML = `UV Index: <span class="${uvColor}">${uvValue}</span>`;
+      right.appendChild(uvi);
+      currentForecast.appendChild(right);
 
-      // temp.innerHTML = `Temp: ${data.current.temp}&deg; F`;
-      // humid.innerText = `Humidity: ${data.current.humidity}%`;
-      // wind.innerText = `Wind speed: ${data.current.wind_speed} MPH`;
-      // uvi.innerHTML = `UV Index: <span class="uvColor">${data.current.uvi}</span>`;
-      // const uvColor = document.querySelector(".uvColor");
-      // if (data.current.uvi < 3) {
-      // 		// for uvindex of 0-2
-      // 		uvColor.classList.add("uvLow");
-      // } else if (data.current.uvi >= 3 && data.current.uvi < 6) {
-      // 		// for uvindex of 3-5
-      // 		uvColor.classList.add("uvModerate");
-      // } else if (data.current.uvi >= 6 && data.current.uvi < 8) {
-      // 		// for uvindex of 6-7
-      // 		uvColor.classList.add("uvHigh");
-      // } else if (data.current.uvi >= 8 && data.current.uvi < 11) {
-      // 		// for uvindex of 8-10
-      // 		uvColor.classList.add("uvVeryHigh");
-      // } else {
-      // 		// for uvindex of 11+
-      // 		uvColor.classList.add("uvExtreme");
-      // }
-      // 5 DAY FORECAST DELETE EXISTING BEFORE RE-RENDER
-      document
-        .querySelectorAll(".forecastInd")
-        .forEach((e) => e.parentNode.removeChild(e));
       // 8 DAY FORECAST RENDER
+      forecast.innerHTML = "";
       const forecastData = data.daily;
       console.log(forecastData);
       for (let i = 1; i < forecastData.length - 1; i++) {
@@ -97,7 +121,6 @@ function renderWeather(coords) {
 
 function buildForecastTile(data) {
   console.log(data);
-  // const future = document.querySelector("#sevenDayForecast");
   // CREATE INDIVIDUAL DAY CELL
   const weatherCell = document.createElement("div");
   weatherCell.classList.add("forecastInd");

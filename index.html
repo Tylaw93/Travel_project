@@ -7,8 +7,6 @@
       href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./assets/css/style.css" />
-
     <title>Museum Hunter</title>
   </head>
 
@@ -67,24 +65,13 @@
               Submit
             </button>
           </form>
-          <div class="map">
-            <img id="map" src="" alt="city map" class="w-300px h-300px" />
-          </div>
-          <br />
-          <div class="pinLocationData">
-            <!-- modal -->
-            <!-- <ion-icon name="star-outline"></ion-icon>
-            <ion-icon name="star"></ion-icon> -->
-            <!-- <ion-icon name="heart-outline"></ion-icon>
-            <ion-icon name="heart-outline"></ion-icon> -->
-            <!-- Name, lat/long, brief desc -->
-            <!-- text-red-500 -->
-            <img id="locationData" src="" alt="location data" />
+          <div id="map">
+            <!-- MAP DATA RENDERS HERE -->
           </div>
         </section>
         <br>
         <section id="forecast" class="weatherData flex flex-col justify-center items-center w-full">
-          <div id="currentForecast" class="flex flex-row justify-center items-center bg-gray-300 w-4/5 mb-4"></div>
+          <div id="currentForecast" class="flex flex-row justify-evenly items-center bg-gray-300 w-4/5 mb-4 rounded-2xl"></div>
           <div id="sevenDayForecast" class="flex flex-row flex-wrap justify-center items-center gap-1"></div>
         </section>
       </div>
@@ -97,12 +84,12 @@
 
 
     </main>
-    <!-- <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="./assets/js/weather.js"></script>
-    <!-- <script src="./assets/js/script.js"></script> -->
     <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/script.js"></script>
+
   </body>
 </html>
