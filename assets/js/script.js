@@ -49,6 +49,7 @@ function getLocalAttractions(data, map) {
           let details = e.features[0].properties;
           if (details.wikidata) {
             const atttractionDetails = `https://api.opentripmap.com/0.1/en/places/xid/${details.wikidata}?apikey=${apikey}`;
+
             fetch(atttractionDetails)
               .then(function (response) {
                 return response.json();
