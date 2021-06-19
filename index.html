@@ -7,10 +7,6 @@
       href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
       rel="stylesheet"
     />
-    <!-- <link
-      href="https://unpkg.com/ionicons@4.5.5/dist/css/ionicons.min.css"
-      rel="stylesheet"
-    /> -->
     <link rel="stylesheet" href="./assets/css/style.css" />
 
     <title>Museum Hunter</title>
@@ -27,70 +23,79 @@
               alt="D3 Logo 'Dynamic Duo Development"
               class="w-12"
           /></a>
-          <h1 class="text-xl font-semibold">Museum Hunter</h1>
-          <!-- <i class="ion-md-menu pr-4" id="jsnav-toggle"></i> -->
+          <h1 class="text-2xl font-semibold">Museum Hunter</h1>
           <ion-icon name="menu" class="pr-4" id="jsnav-toggle"></ion-icon>
         </div>
         <div
           class="invisible flex flex-col items-end pr-4"
           id="jsmenu"
         >
-          <a href="" class="">Search</a>
-          <a href="" class="">Favorite Destinations</a>
+          <a href="" id="aSearch" class="">Search</a>
+          <a href="" id="aFavorites" class="">Favorite Destinations</a>
         </div>
       </nav>
       <!-- end navigation -->
     </header>
 
     <main class="flex flex-col justify-center items-center gap-4 w-11/12 pb-4">
-      <section id="searchContainer" class="flex flex-col">
-        <form
-          action="#"
-          id="searchForm"
-          class="flex flex-row justify-between items-center py-4"
-        >
-          <label for="city"></label>
-            <input
-              type="text"
-              id="city"
-              class="border-black bg-gray-200 placeholder-gray-700"
-              placeholder="Enter a city here..."
-            />
-          </label>
-          <button
-            type="submit"
-            id="searchFormBtn"
-            class="
-              py-2
-              px-4
-              font-semibold
-              rounded-2xl
-              bg-blue-300
-              active:bg-blue-500
-            "
+      <div id="searchCont">
+        <section id="searchContainer" class="flex flex-col">
+          <form
+            action="#"
+            id="searchForm"
+            class="flex flex-row justify-evenly items-center py-4"
           >
-            Submit
-          </button>
-        </form>
-        <div class="map">
-          <img id="map" src="" alt="city map" class="w-300px h-300px" />
-        </div>
-        <br />
-        <div class="pinLocationData">
-          <!-- modal -->
-          <!-- <ion-icon name="star-outline"></ion-icon>
-          <ion-icon name="star"></ion-icon> -->
-          <!-- <ion-icon name="heart-outline"></ion-icon>
-          <ion-icon name="heart-outline"></ion-icon> -->
-          <!-- Name, lat/long, brief desc -->
-          <!-- text-red-500 -->
-          <img id="locationData" src="" alt="location data" />
-        </div>
-      </section>
+            <label for="city"></label>
+              <input
+                type="text"
+                id="city"
+                class="border-black bg-gray-200 placeholder-gray-700"
+                placeholder="Enter a city here..."
+              />
+            </label>
+            <button
+              type="submit"
+              id="searchFormBtn"
+              class="
 
-      <section class="weatherData">
-        <img id="weather" src="" alt="weather" />
-      </section>
+                px-4
+                font-semibold
+                rounded-2xl
+                bg-blue-300
+                active:bg-blue-500
+              "
+            >
+              Submit
+            </button>
+          </form>
+          <div class="map">
+            <img id="map" src="" alt="city map" class="w-300px h-300px" />
+          </div>
+          <br />
+          <div class="pinLocationData">
+            <!-- modal -->
+            <!-- <ion-icon name="star-outline"></ion-icon>
+            <ion-icon name="star"></ion-icon> -->
+            <!-- <ion-icon name="heart-outline"></ion-icon>
+            <ion-icon name="heart-outline"></ion-icon> -->
+            <!-- Name, lat/long, brief desc -->
+            <!-- text-red-500 -->
+            <img id="locationData" src="" alt="location data" />
+          </div>
+        </section>
+        <br>
+        <section class="weatherData">
+          <img id="weather" src="" alt="weather" />
+        </section>
+      </div>
+
+      <div id="favoritesCont" class="hidden mt-14">
+        <section class="favoriteData">
+          <img id="FavoriteCard" src="" alt="favorite data" />
+        </section>
+      </div>
+
+
     </main>
     <!-- <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script> -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
