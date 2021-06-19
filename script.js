@@ -9,7 +9,7 @@ document.addEventListener("submit", getCityName);
 
 function getLocalAttractions(data, map) {
   console.log(data);
-  const atttractions = `https://api.opentripmap.com/0.1/en/places/radius?radius=2000&lon=${data.lon}&lat=${data.lat}&apikey=${apikey}`;
+  const atttractions = `https://api.opentripmap.com/0.1/en/places/radius?radius=20000&lon=${data.lon}&lat=${data.lat}&kinds=museums&apikey=${apikey}`;
   fetch(atttractions)
     .then(function (response) {
       return response.json();
@@ -91,7 +91,7 @@ function getCityName(params) {
         container: "map", // container ID
         style: "mapbox://styles/mapbox/streets-v11", // style URL
         center: [data.lon, data.lat], // starting position [lng, lat]
-        zoom: 13, // starting zoom
+        zoom: 11, // starting zoom
       });
       getLocalAttractions(data, map);
     });
