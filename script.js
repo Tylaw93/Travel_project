@@ -8,15 +8,13 @@ const apikey = "5ae2e3f221c38a28845f05b63b141ff8b556302ea945abb40cb4ffe1";
 document.addEventListener("submit", getCityName);
 
 function getLocalAttractions(data, map) {
-  console.log(data);
   const atttractions = `https://api.opentripmap.com/0.1/en/places/radius?radius=20000&lon=${data.lon}&lat=${data.lat}&kinds=museums&apikey=${apikey}`;
+
   fetch(atttractions)
     .then(function (response) {
       return response.json();
     })
     .then(function (museums) {
-      console.log(museums);
-
       map.on("load", function () {
         map.addSource("places", {
           type: "geojson",
@@ -45,10 +43,20 @@ function getLocalAttractions(data, map) {
         map.on("mouseenter", "places", function (e) {
           // Change the cursor style as a UI indicator.
           map.getCanvas().style.cursor = "pointer";
-
+          console.log(e);
           let coordinates = e.features[0].geometry.coordinates.slice();
           let description = e.features[0].properties.name;
-
+          let details = e.features[0].properties;
+          if (details.wikidata) {
+            const atttractionDetails = `https://api.opentripmap.com/0.1/en/places/xid/${details.wikidata}?apikey=${apikey}`;
+            fetch(atttractionDetails)
+              .then(function (response) {
+                return response.json();
+              })
+              .then(function (data) {
+                console.log(data);
+              });
+          }
           // Ensure that if the map is zoomed out such that multiple
           // copies of the feature are visible, the popup appears
           // over the copy being pointed to.
@@ -79,7 +87,6 @@ function getCityName(params) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
       // eslint-disable-next-line no-undef
       mapboxgl.accessToken =
         "pk.eyJ1IjoidHlsYXc5MyIsImEiOiJja3B1N3hyeG8wdmRxMnVvNnNxa2VuaG5iIn0.lMBPEZ7KGl2Y2nJk0u1RDQ";
