@@ -42,6 +42,8 @@ function getLocalAttractions(data, map) {
 
         map.on("mouseenter", "places", function (e) {
           // Change the cursor style as a UI indicator.
+          map.getCanvas().style.cursor = "";
+          popup.remove();
           map.getCanvas().style.cursor = "pointer";
           console.log(e);
           let coordinates = e.features[0].geometry.coordinates.slice();
@@ -54,26 +56,41 @@ function getLocalAttractions(data, map) {
               .then(function (response) {
                 return response.json();
               })
-              .then(function (data) {
-                console.log(data);
+              .then(function (detail) {
+                console.log(detail);
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                  coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
+
+                if (detail.preview) {
+                  $("#locationImg").html(
+                    `<img src="${detail.preview.source}">`
+                  );
+                  $("#locationDesc").html(
+                    detail.wikipedia_extracts
+                      ? detail.wikipedia_extracts.html
+                      : detail.info
+                      ? detail.info.descr
+                      : "No description"
+                  );
+                  popup.setLngLat(coordinates).setHTML(description).addTo(map);
+                } else {
+                  popup.setLngLat(coordinates).setHTML(description).addTo(map);
+                }
+                // #locationImg #locationDesc
+
+                // Populate the popup and set its coordinates
+                // based on the feature found.
               });
           }
           // Ensure that if the map is zoomed out such that multiple
           // copies of the feature are visible, the popup appears
           // over the copy being pointed to.
-          while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-          }
-
-          // Populate the popup and set its coordinates
-          // based on the feature found.
-          popup.setLngLat(coordinates).setHTML(description).addTo(map);
         });
 
-        map.on("mouseleave", "places", function () {
-          map.getCanvas().style.cursor = "";
-          popup.remove();
-        });
+        // map.on("mouseleave", "places", function () {
+
+        // });
       });
     });
 }
