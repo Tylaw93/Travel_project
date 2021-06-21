@@ -47,7 +47,7 @@ function renderWeather(coords) {
       left.classList.add("justify-evenly");
       left.classList.add("items-center");
       left.classList.add("py-1");
-      left.classList.add("w-2/5");
+      left.classList.add("w-1/2");
       // 'TODAY' RENDER
       const today = document.createElement("p");
       today.classList.add("font-semibold");
@@ -73,9 +73,10 @@ function renderWeather(coords) {
       right.classList.add("flex");
       right.classList.add("flex-col");
       right.classList.add("justify-between");
-      right.classList.add("items-center");
+      right.classList.add("sm:items-start");
+      right.classList.add("md:pl-8");
       right.classList.add("py-1");
-      right.classList.add("w-2/5");
+      right.classList.add("w-1/2");
       right.classList.add("gap-1");
       // APPEND TEMP
       const temp = document.createElement("p");
@@ -89,23 +90,27 @@ function renderWeather(coords) {
       const uvi = document.createElement("p");
       const uvValue = data.daily[0].uvi;
       let uvColor = "";
+      let textColor = "";
       if (uvValue < 3) {
         // for uvindex of 0-2
-        uvColor = "uvLow";
+        uvColor = "bg-green-500";
+        textColor = "text-white";
       } else if (uvValue >= 3 && uvValue < 6) {
         // for uvindex of 3-5
-        uvColor = "uvModerate";
+        uvColor = "bg-yellow-300";
       } else if (uvValue >= 6 && uvValue < 8) {
         // for uvindex of 6-7
-        uvColor = "uvHigh";
+        uvColor = "bg-yellow-600";
       } else if (uvValue >= 8 && uvValue < 11) {
         // for uvindex of 8-10
-        uvColor = "uvVeryHigh";
+        uvColor = "bg-red-600";
+        textColor = "text-white";
       } else {
         // for uvindex of 11+
-        uvColor = "uvExtreme";
+        uvColor = "bg-purple-700";
+        textColor = "text-white";
       }
-      uvi.innerHTML = `UV Index: <span class="${uvColor}">${uvValue}</span>`;
+      uvi.innerHTML = `UV Index: <span class="${uvColor} ${textColor} px-2 rounded-2xl">${uvValue}</span>`;
       right.appendChild(uvi);
       currentForecast.appendChild(right);
 
@@ -126,11 +131,14 @@ function buildForecastTile(data) {
   weatherCell.classList.add("forecastInd");
   weatherCell.classList.add("flex");
   weatherCell.classList.add("flex-col");
-  weatherCell.classList.add("justify-center");
+  weatherCell.classList.add("sm:justify-evenly");
+  weatherCell.classList.add("md:justify-center");
   weatherCell.classList.add("items-center");
   weatherCell.classList.add("forecastInd");
   weatherCell.classList.add("py-1");
   weatherCell.classList.add("w-2/5");
+  weatherCell.classList.add("md:w-3/12");
+  weatherCell.classList.add("lg:w-2/5");
   weatherCell.classList.add("bg-gray-300");
   weatherCell.classList.add("rounded-2xl");
   // APPEND DIV FOR DATE / ICON TO CELL

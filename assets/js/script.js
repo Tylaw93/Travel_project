@@ -5,6 +5,12 @@ const apikey = "5ae2e3f221c38a28845f05b63b141ff8b556302ea945abb40cb4ffe1";
 // eslint-disable-next-line no-undef
 // const cityName = "St. Louis";
 
+/*
+we need to set #locationImg and #locationDesc .innerHTML("") when beginning search begins so that a new city search clears results from the previous city
+
+
+*/
+
 document.addEventListener("submit", getCityName);
 
 function getLocalAttractions(data, map) {

@@ -15,8 +15,8 @@
     <title>Museum Hunter</title>
   </head>
 
-  <body class="w-screen flex flex-col items-center">
-    <header class="w-full" id="top">
+  <body class="w-screen flex flex-col justify-center items-center">
+    <header class="flex flex-col justify-center items-center w-full" id="top">
       <!-- begin navigation -->
       <nav class="flex flex-col w-full">
         <div class="flex flex-row justify-between items-center">
@@ -40,55 +40,61 @@
       <!-- end navigation -->
     </header>
 
-    <main class="flex flex-col justify-center items-center gap-4 w-full pb-4">
-      <div id="searchCont">
-        <section id="searchContainer" class="flex flex-col justify-center items-center">
-          <form
-            action="#"
-            id="searchForm"
-            class="flex flex-row justify-center items-center gap-1 py-4"
-          >
-            <label for="city"></label>
-              <input
-                type="text"
-                id="city"
-                class="border-black bg-gray-200 placeholder-gray-700"
-                placeholder="Enter a city here..."
-              />
-            </label>
-            <button
-              type="submit"
-              id="searchFormBtn"
-              class="
-                px-4
-                font-semibold
-                rounded-2xl
-                bg-blue-300
-                active:bg-blue-500
-              "
-            >
-              Submit
-            </button>
-          </form>
+    <main class="flex flex-col justify-center lg:justify-evenly items-start gap-4 w-11/12 pb-4">
 
-        </section>
-        <div id="mapContainer" class="flex flex-col justify-center items-center width-11/12">
-          <div id="map" style="width: 350px; height: 350px" >
+      <div id="formContainer" class="flex flex-col justify-center items-center w-full">
+        <form
+          action="#"
+          id="searchForm"
+          class="flex flex-row justify-center items-center gap-1 py-4 w-10/12"
+        >
+          <label for="city"></label>
+            <input
+              type="text"
+              id="city"
+              class="border-black bg-gray-200 placeholder-gray-700"
+              placeholder="Enter a city here..."
+            />
+          </label>
+          <button
+            type="submit"
+            id="searchFormBtn"
+            class="
+              px-4
+              font-semibold
+              rounded-2xl
+              bg-blue-300
+              active:bg-blue-500
+            "
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+      <div class="flex flex-col lg:flex-row justify-evenly items-start">
+        <div id="searchResultsCont" class="flex flex-col lg:flex-row lg:flex-wrap justify-center items-center w-full gap-4 lg:w-3/5">
+
+          <div id="map" style="width: 350px; height: 350px" class="w-2/5">
             <!-- CITY MAP DATA RENDERS HERE -->
           </div>
-          <div id="locationData" class="flex flex-row justify-center items-center gap-1 width-full>
-            <!-- LOCATION IMG, DESC RENDERS HERE -->
-            <div id="locationImg" class="flex flex-row justify-center items-center"></div>
-            <div id="locationDesc" class="flex flex-col"></div>
+          <div id="locationImg" class="flex flex-row justify-center items-center w-2/5">
+            <!-- LOCATION IMAGE DATA RENDERS HERE -->
+          </div>
+          <div id="locationDesc" class="flex flex-col justify-center items-start md:w-4/5 lg:w-11/12">
+            <!-- LOCATION DESCRIPTION DATA RENDERS HERE -->
           </div>
         </div>
-        <br>
-        <section id="forecast" class="weatherData flex flex-col justify-center items-center w-full">
-          <div id="currentForecast" class="flex flex-row justify-evenly items-center bg-gray-300 w-4/5 mb-4 rounded-2xl"></div>
-          <div id="sevenDayForecast" class="flex flex-row flex-wrap justify-center items-center gap-1"></div>
-        </section>
-      </div>
 
+
+        <div id="forecastContainer" class="flex flex-col justify-center items-center w-full gap-4 lg:w-2/5">
+          <div id="currentForecast" class="flex flex-row justify-center items-center bg-gray-300 w-11/12 md:w-4/5 lg:w-11/12 rounded-2xl">
+            <!-- CURRENT WEATHER DATA RENDERS HERE -->
+          </div>
+          <div id="sevenDayForecast" class="flex flex-row flex-wrap justify-evenly md:justify-center items-center w-full gap-y-4 md:gap-4">
+            <!-- REST OF WEEK WEATHER DATA RENDERS HERE -->
+          </div>
+        </div>
+      </div>
       <div id="favoritesCont" class="hidden mt-14">
         <section class="favoriteData">
           <img id="FavoriteCard" src="" alt="favorite data" />
