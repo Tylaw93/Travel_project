@@ -88,9 +88,10 @@ function getLocalAttractions(data, map) {
           // over the copy being pointed to.
         });
 
-        // map.on("mouseleave", "places", function () {
-
-        // });
+        map.on("click", function () {
+          map.getCanvas().style.cursor = "";
+          popup.remove();
+        });
       });
     });
 }
