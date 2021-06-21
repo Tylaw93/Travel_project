@@ -39,7 +39,7 @@ function renderWeather(coords) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
+      // console.log(data);
       // LEFT SIDE CONTAINER
       const left = document.createElement("div");
       left.classList.add("flex");
@@ -117,7 +117,7 @@ function renderWeather(coords) {
       // 8 DAY FORECAST RENDER
       forecast.innerHTML = "";
       const forecastData = data.daily;
-      console.log(forecastData);
+      // console.log(forecastData);
       for (let i = 1; i < forecastData.length - 1; i++) {
         buildForecastTile(forecastData[i], 1);
       }
@@ -125,7 +125,7 @@ function renderWeather(coords) {
 }
 
 function buildForecastTile(data) {
-  console.log(data);
+  // console.log(data);
   // CREATE INDIVIDUAL DAY CELL
   const weatherCell = document.createElement("div");
   weatherCell.classList.add("forecastInd");
