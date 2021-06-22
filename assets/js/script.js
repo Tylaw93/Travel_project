@@ -125,6 +125,8 @@ function getCityName(params) {
         center: [data.lon, data.lat], // starting position [lng, lat]
         zoom: 11, // starting zoom
       });
+      $("#locationImg").html("");
+      $("#locationDesc").html("");
       getLocalAttractions(data, map);
     });
 }
