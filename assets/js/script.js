@@ -128,7 +128,9 @@ function getLocalAttractions(data, map) {
             favorites.push(description);
           });
           $(".fav").click(function () {
-            console.log("why");
+            $(this).toggleClass("hidden");
+            $(".not-fav").toggleClass("hidden");
+            favorites.push(description);
           });
           // Ensure that if the map is zoomed out such that multiple
           // copies of the feature are visible, the popup appears
@@ -204,7 +206,9 @@ function getLocalAttractions(data, map) {
                   favorites.push(description);
                 });
                 $(".fav").click(function () {
-                  console.log("why");
+                  $(this).toggleClass("hidden");
+                  $(".not-fav").toggleClass("hidden");
+                  favorites.push(description);
                 });
                 // #locationImg #locationDesc
 
@@ -229,7 +233,7 @@ function getLocalAttractions(data, map) {
             });
             $(".fav").click(function () {
               $(this).toggleClass("hidden");
-              $(".fav").toggleClass("hidden");
+              $(".not-fav").toggleClass("hidden");
               favorites.push(description);
             });
           }
