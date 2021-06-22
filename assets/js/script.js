@@ -125,6 +125,7 @@ function getLocalAttractions(data, map) {
           $(".not-fav").click(function () {
             $(this).toggleClass("hidden");
             $(".fav").toggleClass("hidden");
+            console.log("3");
             favorites.push(description);
           });
           $(".fav").click(function () {
@@ -203,6 +204,8 @@ function getLocalAttractions(data, map) {
                 $(".not-fav").click(function () {
                   $(this).toggleClass("hidden");
                   $(".fav").toggleClass("hidden");
+                  console.log("2");
+
                   favorites.push(description);
                 });
                 $(".fav").click(function () {
@@ -225,18 +228,18 @@ function getLocalAttractions(data, map) {
                   `<ion-icon class="fav md hydrated text-red-500 hidden" name="heart" role="img" aria-label="heart"></ion-icon>`
               )
               .addTo(map);
-
-            $(".not-fav").click(function () {
-              $(this).toggleClass("hidden");
-              $(".fav").toggleClass("hidden");
-              favorites.push(description);
-            });
-            $(".fav").click(function () {
-              $(this).toggleClass("hidden");
-              $(".not-fav").toggleClass("hidden");
-              favorites.push(description);
-            });
           }
+          $(".not-fav").click(function () {
+            $(this).toggleClass("hidden");
+            $(".fav").toggleClass("hidden");
+            console.log("1");
+            favorites.push(description);
+          });
+          $(".fav").click(function () {
+            $(this).toggleClass("hidden");
+            $(".not-fav").toggleClass("hidden");
+            favorites.push(description);
+          });
         });
       });
     });
