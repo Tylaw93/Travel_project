@@ -47,7 +47,7 @@
     </header>
 
     <main class="flex flex-col justify-center items-center pb-4 w-full">
-      <div id="searchResultCont" class="flex flex-col justify-center lg:justify-evenly items-center gap-4 w-11/12">
+      <div id="searchResultCont" class="flex flex-col justify-center lg:justify-evenly items-start gap-4 w-11/12">
         <div id="formContainer" class="flex flex-col justify-center items-center w-full">
           <form
             action="#"
@@ -77,31 +77,30 @@
             </button>
           </form>
         </div>
+        <div class="flex flex-col lg:flex-row justify-evenly items-start">
+          <div id="searchResultsCont" class="flex flex-col lg:flex-row lg:flex-wrap justify-center items-center w-full gap-4 lg:w-3/5">
 
-        <div class="flex flex-col lg:flex-row justify-evenly items-center">
-          <div id="searchResultsCont" class="flex flex-col lg:flex-row  justify-center items-center w-full gap-4 lg:w-full">
-
-            <div id="map" style="width: 350px; height: 350px" class="flex flex-row justify-center items-center">
+            <div id="map" style="width: 350px; height: 350px" class="w-2/5">
               <!-- CITY MAP DATA RENDERS HERE -->
             </div>
-						<div id="locationCont" class="flex flex-col justify-center items-center lg:w-1/2 hidden">
-							<div id="locationImg" class="flex flex-row justify-center items-center">
-								<!-- LOCATION IMAGE DATA RENDERS HERE -->
-							</div>
-							<div id="locationDesc" class="flex flex-col justify-center items-start md:w-4/5 lg:w-full">
-								<!-- LOCATION DESCRIPTION DATA RENDERS HERE -->
-							</div>
-						</div>
+            <div id="locationImg" class="flex flex-row justify-center items-center w-2/5 hidden">
+              <!-- LOCATION IMAGE DATA RENDERS HERE -->
+            </div>
+            <div id="locationDesc" class="flex flex-col justify-center items-start md:w-4/5 lg:w-11/12 hidden">
+              <!-- LOCATION DESCRIPTION DATA RENDERS HERE -->
+            </div>
+          </div>
+
+
+          <div id="forecastContainer" class="flex flex-col justify-center items-center w-full gap-4 lg:w-2/5">
+            <div id="currentForecast" class="flex flex-row justify-center items-center bg-gray-300 w-11/12 md:w-4/5 lg:w-11/12 rounded-2xl">
+              <!-- CURRENT WEATHER DATA RENDERS HERE -->
+            </div>
+            <div id="sevenDayForecast" class="flex flex-row flex-wrap justify-evenly md:justify-center items-center w-full gap-y-4 md:gap-4">
+              <!-- REST OF WEEK WEATHER DATA RENDERS HERE -->
+            </div>
           </div>
         </div>
-				<div id="forecastContainer" class="flex flex-col justify-center items-center w-full gap-4 lg:w-11/12">
-					<div id="currentForecast" class="flex flex-row justify-center items-center bg-gray-300 w-11/12 md:w-4/5 lg:w-2/5 rounded-2xl">
-						<!-- CURRENT WEATHER DATA RENDERS HERE -->
-					</div>
-					<div id="sevenDayForecast" class="flex flex-row flex-wrap lg:flex-nowrap justify-evenly md:justify-center lg:justify-evenly items-center w-full gap-y-4 md:gap-4">
-						<!-- REST OF WEEK WEATHER DATA RENDERS HERE -->
-					</div>
-				</div>
       </div>
 
       <div id="favoritesCont" class="hidden flex flex-col justify-center items-center w-11/12">
