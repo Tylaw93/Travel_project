@@ -10,7 +10,8 @@ we need to set #locationImg and #locationDesc .innerHTML("") when beginning sear
 
 
 */
-
+let favorites = [];
+let favs = [new Set(favorites)];
 document.addEventListener("submit", getCityName);
 
 function getLocalAttractions(data, map) {
@@ -89,7 +90,8 @@ function getLocalAttractions(data, map) {
                     .setHTML(
                       description +
                         `
-                  <ion-icon class="not-fav" name="heart-outline"></ion-icon>`
+                  <ion-icon class="not-fav" name="heart-outline"></ion-icon>` +
+                        `<ion-icon class="fav md hydrated text-red-500 hidden" name="heart" role="img" aria-label="heart"></ion-icon>`
                     )
                     .addTo(map);
                 } else {
@@ -98,7 +100,8 @@ function getLocalAttractions(data, map) {
                     .setHTML(
                       description +
                         `
-                  <ion-icon class="not-fav" name="heart-outline"></ion-icon>`
+                  <ion-icon class="not-fav" name="heart-outline"></ion-icon>` +
+                        `<ion-icon class="fav md hydrated text-red-500 hidden" name="heart" role="img" aria-label="heart"></ion-icon>`
                     )
                     .addTo(map);
                 }
@@ -113,15 +116,16 @@ function getLocalAttractions(data, map) {
               .setHTML(
                 description +
                   `
-            <ion-icon class="not-fav" name="heart-outline"></ion-icon>`
+            <ion-icon class="not-fav" name="heart-outline"></ion-icon>` +
+                  `<ion-icon class="fav md hydrated text-red-500 hidden" name="heart" role="img" aria-label="heart"></ion-icon>`
               )
               .addTo(map);
           }
 
           $(".not-fav").click(function () {
-            $(this).replaceWith(
-              "<ion-icon class='fav' name='heart'></ion-icon>"
-            );
+            $(this).toggleClass("hidden");
+            $(".fav").toggleClass("hidden");
+            favorites.push(description);
           });
           $(".fav").click(function () {
             console.log("why");
@@ -135,6 +139,7 @@ function getLocalAttractions(data, map) {
           map.getCanvas().style.cursor = "";
           popup.remove();
         });
+
         map.on("click", "places", function (e) {
           map.getCanvas().style.cursor = "";
           popup.remove();
@@ -177,7 +182,8 @@ function getLocalAttractions(data, map) {
                     .setHTML(
                       description +
                         `
-                    <ion-icon class="not-fav" name="heart-outline"></ion-icon>`
+                    <ion-icon class="not-fav" name="heart-outline"></ion-icon>` +
+                        `<ion-icon class="fav md hydrated text-red-500 hidden" name="heart" role="img" aria-label="heart"></ion-icon>`
                     )
                     .addTo(map);
                 } else {
@@ -186,15 +192,16 @@ function getLocalAttractions(data, map) {
                     .setHTML(
                       description +
                         `
-                  <ion-icon class="not-fav" name="heart-outline"></ion-icon>`
+                  <ion-icon class="not-fav" name="heart-outline"></ion-icon>` +
+                        `<ion-icon class="fav md hydrated text-red-500 hidden" name="heart" role="img" aria-label="heart"></ion-icon>`
                     )
                     .addTo(map);
                 }
 
                 $(".not-fav").click(function () {
-                  $(this).replaceWith(
-                    "<ion-icon class='fav' name='heart'></ion-icon>"
-                  );
+                  $(this).toggleClass("hidden");
+                  $(".fav").toggleClass("hidden");
+                  favorites.push(description);
                 });
                 $(".fav").click(function () {
                   console.log("why");
@@ -210,17 +217,20 @@ function getLocalAttractions(data, map) {
               .setHTML(
                 description +
                   `
-            <ion-icon class="not-fav" name="heart-outline"></ion-icon>`
+            <ion-icon class="not-fav" name="heart-outline"></ion-icon>` +
+                  `<ion-icon class="fav md hydrated text-red-500 hidden" name="heart" role="img" aria-label="heart"></ion-icon>`
               )
               .addTo(map);
 
             $(".not-fav").click(function () {
-              $(this).replaceWith(
-                "<ion-icon class='fav' name='heart'></ion-icon>"
-              );
+              $(this).toggleClass("hidden");
+              $(".fav").toggleClass("hidden");
+              favorites.push(description);
             });
             $(".fav").click(function () {
-              console.log("why");
+              $(this).toggleClass("hidden");
+              $(".fav").toggleClass("hidden");
+              favorites.push(description);
             });
           }
         });
@@ -256,3 +266,6 @@ function getCityName(params) {
       getLocalAttractions(data, map);
     });
 }
+localStorage.setItem("favorites", JSON.stringify(favorites));
+let storedNames = JSON.parse(localStorage.favorites);
+console.log(storedNames);
