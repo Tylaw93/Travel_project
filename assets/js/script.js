@@ -52,7 +52,7 @@ function getLocalAttractions(data, map) {
           map.getCanvas().style.cursor = "";
           popup.remove();
           map.getCanvas().style.cursor = "pointer";
-          console.log(e);
+
           $("#locationImg").html("");
           $("#locationDesc").html("");
           let coordinates = e.features[0].geometry.coordinates.slice();
@@ -66,7 +66,6 @@ function getLocalAttractions(data, map) {
                 return response.json();
               })
               .then(function (detail) {
-                console.log(detail);
                 while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
                   coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
                 }
@@ -93,6 +92,17 @@ function getLocalAttractions(data, map) {
                         `<ion-icon class="fav md hydrated text-red-500 hidden" name="heart" role="img" aria-label="heart"></ion-icon>`
                     )
                     .addTo(map);
+                  $(".not-fav").click(function () {
+                    $(this).toggleClass("hidden");
+                    $(".fav").toggleClass("hidden");
+
+                    favorites.push(description);
+                  });
+                  $(".fav").click(function () {
+                    $(this).toggleClass("hidden");
+                    $(".not-fav").toggleClass("hidden");
+                    favorites.push(description);
+                  });
                 } else {
                   popup
                     .setLngLat(coordinates)
@@ -103,14 +113,23 @@ function getLocalAttractions(data, map) {
                         `<ion-icon class="fav md hydrated text-red-500 hidden" name="heart" role="img" aria-label="heart"></ion-icon>`
                     )
                     .addTo(map);
+                  $(".not-fav").click(function () {
+                    $(this).toggleClass("hidden");
+                    $(".fav").toggleClass("hidden");
+
+                    favorites.push(description);
+                  });
+                  $(".fav").click(function () {
+                    $(this).toggleClass("hidden");
+                    $(".not-fav").toggleClass("hidden");
+                    favorites.push(description);
+                  });
                 }
-                // #locationImg #locationDesc
 
                 // Populate the popup and set its coordinates
                 // based on the feature found.
               });
           } else {
-            console.log("yea");
             popup
               .setLngLat(coordinates)
               .setHTML(
@@ -120,18 +139,19 @@ function getLocalAttractions(data, map) {
                   `<ion-icon class="fav md hydrated text-red-500 hidden" name="heart" role="img" aria-label="heart"></ion-icon>`
               )
               .addTo(map);
+            $(".not-fav").click(function () {
+              $(this).toggleClass("hidden");
+              $(".fav").toggleClass("hidden");
+
+              favorites.push(description);
+            });
+            $(".fav").click(function () {
+              $(this).toggleClass("hidden");
+              $(".not-fav").toggleClass("hidden");
+              favorites.push(description);
+            });
           }
 
-          $(".not-fav").click(function () {
-            $(this).toggleClass("hidden");
-            $(".fav").toggleClass("hidden");
-            favorites.push(description);
-          });
-          $(".fav").click(function () {
-            $(this).toggleClass("hidden");
-            $(".not-fav").toggleClass("hidden");
-            favorites.push(description);
-          });
           // Ensure that if the map is zoomed out such that multiple
           // copies of the feature are visible, the popup appears
           // over the copy being pointed to.
@@ -148,7 +168,7 @@ function getLocalAttractions(data, map) {
           $("#locationImg").html("");
           $("#locationDesc").html("");
           map.getCanvas().style.cursor = "pointer";
-          console.log(e);
+
           let coordinates = e.features[0].geometry.coordinates.slice();
           let description = e.features[0].properties.name;
           let details = e.features[0].properties;
@@ -160,7 +180,6 @@ function getLocalAttractions(data, map) {
                 return response.json();
               })
               .then(function (detail) {
-                console.log(detail);
                 while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
                   coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
                 }
@@ -187,6 +206,17 @@ function getLocalAttractions(data, map) {
                         `<ion-icon class="fav md hydrated text-red-500 hidden" name="heart" role="img" aria-label="heart"></ion-icon>`
                     )
                     .addTo(map);
+                  $(".not-fav").click(function () {
+                    $(this).toggleClass("hidden");
+                    $(".fav").toggleClass("hidden");
+
+                    favorites.push(description);
+                  });
+                  $(".fav").click(function () {
+                    $(this).toggleClass("hidden");
+                    $(".not-fav").toggleClass("hidden");
+                    favorites.push(description);
+                  });
                 } else {
                   popup
                     .setLngLat(coordinates)
@@ -197,18 +227,19 @@ function getLocalAttractions(data, map) {
                         `<ion-icon class="fav md hydrated text-red-500 hidden" name="heart" role="img" aria-label="heart"></ion-icon>`
                     )
                     .addTo(map);
+                  $(".not-fav").click(function () {
+                    $(this).toggleClass("hidden");
+                    $(".fav").toggleClass("hidden");
+
+                    favorites.push(description);
+                  });
+                  $(".fav").click(function () {
+                    $(this).toggleClass("hidden");
+                    $(".not-fav").toggleClass("hidden");
+                    favorites.push(description);
+                  });
                 }
 
-                $(".not-fav").click(function () {
-                  $(this).toggleClass("hidden");
-                  $(".fav").toggleClass("hidden");
-                  favorites.push(description);
-                });
-                $(".fav").click(function () {
-                  $(this).toggleClass("hidden");
-                  $(".not-fav").toggleClass("hidden");
-                  favorites.push(description);
-                });
                 // #locationImg #locationDesc
 
                 // Populate the popup and set its coordinates
@@ -224,18 +255,18 @@ function getLocalAttractions(data, map) {
                   `<ion-icon class="fav md hydrated text-red-500 hidden" name="heart" role="img" aria-label="heart"></ion-icon>`
               )
               .addTo(map);
+            $(".not-fav").click(function () {
+              $(this).toggleClass("hidden");
+              $(".fav").toggleClass("hidden");
+
+              favorites.push(description);
+            });
+            $(".fav").click(function () {
+              $(this).toggleClass("hidden");
+              $(".not-fav").toggleClass("hidden");
+              favorites.push(description);
+            });
           }
-          $(".not-fav").click(function () {
-            $(this).toggleClass("hidden");
-            $(".fav").toggleClass("hidden");
-            console.log("1");
-            favorites.push(description);
-          });
-          $(".fav").click(function () {
-            $(this).toggleClass("hidden");
-            $(".not-fav").toggleClass("hidden");
-            favorites.push(description);
-          });
         });
       });
     });
