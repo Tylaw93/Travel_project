@@ -75,8 +75,7 @@ function getLocalAttractions(data, map) {
                   $("#locationImg").html(
                     `<img src="${detail.preview.source}">`
                   );
-                  $("#locationDesc").removeClass("hidden");
-                  $("#locationImg").removeClass("hidden");
+                  $("#locationCont").removeClass("hidden");
 
                   $("#locationDesc").html(
                     detail.wikipedia_extracts
@@ -111,6 +110,7 @@ function getLocalAttractions(data, map) {
                 // based on the feature found.
               });
           } else {
+            console.log("yea");
             popup
               .setLngLat(coordinates)
               .setHTML(
@@ -125,7 +125,6 @@ function getLocalAttractions(data, map) {
           $(".not-fav").click(function () {
             $(this).toggleClass("hidden");
             $(".fav").toggleClass("hidden");
-            console.log("3");
             favorites.push(description);
           });
           $(".fav").click(function () {
@@ -170,8 +169,7 @@ function getLocalAttractions(data, map) {
                   $("#locationImg").html(
                     `<img src="${detail.preview.source}">`
                   );
-                  $("#locationDesc").removeClass("hidden");
-                  $("#locationImg").removeClass("hidden");
+                  $("#locationCont").removeClass("hidden");
 
                   $("#locationDesc").html(
                     detail.wikipedia_extracts
@@ -204,8 +202,6 @@ function getLocalAttractions(data, map) {
                 $(".not-fav").click(function () {
                   $(this).toggleClass("hidden");
                   $(".fav").toggleClass("hidden");
-                  console.log("2");
-
                   favorites.push(description);
                 });
                 $(".fav").click(function () {
