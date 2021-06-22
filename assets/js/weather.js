@@ -6,6 +6,7 @@ const forecast = document.querySelector("#sevenDayForecast");
 
 let currCity = "";
 let coords = [];
+// eslint-disable-next-line no-unused-vars
 let response;
 
 function weatherSearch(event) {
@@ -148,6 +149,7 @@ function buildForecastTile(data) {
   // APPEND DATE TO DIV
   const date = document.createElement("p");
   const today = data.dt;
+  // eslint-disable-next-line no-undef
   const day = moment.unix(today).format("MMM Do");
   date.innerText = day;
   dateIcon.appendChild(date);

@@ -10,7 +10,8 @@ we need to set #locationImg and #locationDesc .innerHTML("") when beginning sear
 
 
 */
-
+let favorites = [];
+let favs = [new Set(favorites)];
 document.addEventListener("submit", getCityName);
 
 function getLocalAttractions(data, map) {
@@ -52,6 +53,8 @@ function getLocalAttractions(data, map) {
           popup.remove();
           map.getCanvas().style.cursor = "pointer";
           console.log(e);
+          $("#locationImg").html("");
+          $("#locationDesc").html("");
           let coordinates = e.features[0].geometry.coordinates.slice();
           let description = e.features[0].properties.name;
           let details = e.features[0].properties;
@@ -72,6 +75,9 @@ function getLocalAttractions(data, map) {
                   $("#locationImg").html(
                     `<img src="${detail.preview.source}">`
                   );
+                  $("#locationDesc").removeClass("hidden");
+                  $("#locationImg").removeClass("hidden");
+
                   $("#locationDesc").html(
                     detail.wikipedia_extracts
                       ? detail.wikipedia_extracts.html
@@ -79,24 +85,159 @@ function getLocalAttractions(data, map) {
                       ? detail.info.descr
                       : "No description"
                   );
-                  popup.setLngLat(coordinates).setHTML(description).addTo(map);
+                  popup
+                    .setLngLat(coordinates)
+                    .setHTML(
+                      description +
+                        `
+                  <ion-icon class="not-fav" name="heart-outline"></ion-icon>` +
+                        `<ion-icon class="fav md hydrated text-red-500 hidden" name="heart" role="img" aria-label="heart"></ion-icon>`
+                    )
+                    .addTo(map);
                 } else {
-                  popup.setLngLat(coordinates).setHTML(description).addTo(map);
+                  popup
+                    .setLngLat(coordinates)
+                    .setHTML(
+                      description +
+                        `
+                  <ion-icon class="not-fav" name="heart-outline"></ion-icon>` +
+                        `<ion-icon class="fav md hydrated text-red-500 hidden" name="heart" role="img" aria-label="heart"></ion-icon>`
+                    )
+                    .addTo(map);
                 }
                 // #locationImg #locationDesc
 
                 // Populate the popup and set its coordinates
                 // based on the feature found.
               });
+          } else {
+            popup
+              .setLngLat(coordinates)
+              .setHTML(
+                description +
+                  `
+            <ion-icon class="not-fav" name="heart-outline"></ion-icon>` +
+                  `<ion-icon class="fav md hydrated text-red-500 hidden" name="heart" role="img" aria-label="heart"></ion-icon>`
+              )
+              .addTo(map);
           }
+
+          $(".not-fav").click(function () {
+            $(this).toggleClass("hidden");
+            $(".fav").toggleClass("hidden");
+            favorites.push(description);
+          });
+          $(".fav").click(function () {
+            $(this).toggleClass("hidden");
+            $(".not-fav").toggleClass("hidden");
+            favorites.push(description);
+          });
           // Ensure that if the map is zoomed out such that multiple
           // copies of the feature are visible, the popup appears
           // over the copy being pointed to.
         });
 
-        // map.on("mouseleave", "places", function () {
+        map.on("click", function () {
+          map.getCanvas().style.cursor = "";
+          popup.remove();
+        });
 
-        // });
+        map.on("click", "places", function (e) {
+          map.getCanvas().style.cursor = "";
+          popup.remove();
+          $("#locationImg").html("");
+          $("#locationDesc").html("");
+          map.getCanvas().style.cursor = "pointer";
+          console.log(e);
+          let coordinates = e.features[0].geometry.coordinates.slice();
+          let description = e.features[0].properties.name;
+          let details = e.features[0].properties;
+          if (details.wikidata) {
+            const atttractionDetails = `https://api.opentripmap.com/0.1/en/places/xid/${details.wikidata}?apikey=${apikey}`;
+
+            fetch(atttractionDetails)
+              .then(function (response) {
+                return response.json();
+              })
+              .then(function (detail) {
+                console.log(detail);
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                  coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
+
+                if (detail.preview) {
+                  $("#locationImg").html(
+                    `<img src="${detail.preview.source}">`
+                  );
+                  $("#locationDesc").removeClass("hidden");
+                  $("#locationImg").removeClass("hidden");
+
+                  $("#locationDesc").html(
+                    detail.wikipedia_extracts
+                      ? detail.wikipedia_extracts.html
+                      : detail.info
+                      ? detail.info.descr
+                      : "No description"
+                  );
+                  popup
+                    .setLngLat(coordinates)
+                    .setHTML(
+                      description +
+                        `
+                    <ion-icon class="not-fav" name="heart-outline"></ion-icon>` +
+                        `<ion-icon class="fav md hydrated text-red-500 hidden" name="heart" role="img" aria-label="heart"></ion-icon>`
+                    )
+                    .addTo(map);
+                } else {
+                  popup
+                    .setLngLat(coordinates)
+                    .setHTML(
+                      description +
+                        `
+                  <ion-icon class="not-fav" name="heart-outline"></ion-icon>` +
+                        `<ion-icon class="fav md hydrated text-red-500 hidden" name="heart" role="img" aria-label="heart"></ion-icon>`
+                    )
+                    .addTo(map);
+                }
+
+                $(".not-fav").click(function () {
+                  $(this).toggleClass("hidden");
+                  $(".fav").toggleClass("hidden");
+                  favorites.push(description);
+                });
+                $(".fav").click(function () {
+                  $(this).toggleClass("hidden");
+                  $(".not-fav").toggleClass("hidden");
+                  favorites.push(description);
+                });
+                // #locationImg #locationDesc
+
+                // Populate the popup and set its coordinates
+                // based on the feature found.
+              });
+          } else {
+            popup
+              .setLngLat(coordinates)
+              .setHTML(
+                description +
+                  `
+            <ion-icon class="not-fav" name="heart-outline"></ion-icon>` +
+                  `<ion-icon class="fav md hydrated text-red-500 hidden" name="heart" role="img" aria-label="heart"></ion-icon>`
+              )
+              .addTo(map);
+
+            $(".not-fav").click(function () {
+              $(this).toggleClass("hidden");
+              $(".fav").toggleClass("hidden");
+              favorites.push(description);
+            });
+            $(".fav").click(function () {
+              $(this).toggleClass("hidden");
+              $(".not-fav").toggleClass("hidden");
+              favorites.push(description);
+            });
+          }
+        });
       });
     });
 }
@@ -124,6 +265,11 @@ function getCityName(params) {
         center: [data.lon, data.lat], // starting position [lng, lat]
         zoom: 11, // starting zoom
       });
+      $("#locationImg").html("");
+      $("#locationDesc").html("");
       getLocalAttractions(data, map);
     });
 }
+localStorage.setItem("favorites", JSON.stringify(favorites));
+let storedNames = JSON.parse(localStorage.favorites);
+console.log(storedNames);
