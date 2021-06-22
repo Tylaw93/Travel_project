@@ -52,6 +52,8 @@ function getLocalAttractions(data, map) {
           popup.remove();
           map.getCanvas().style.cursor = "pointer";
           console.log(e);
+          $("#locationImg").html("");
+          $("#locationDesc").html("");
           let coordinates = e.features[0].geometry.coordinates.slice();
           let description = e.features[0].properties.name;
           let details = e.features[0].properties;
@@ -72,6 +74,9 @@ function getLocalAttractions(data, map) {
                   $("#locationImg").html(
                     `<img src="${detail.preview.source}">`
                   );
+                  $("#locationDesc").removeClass("hidden");
+                  $("#locationImg").removeClass("hidden");
+
                   $("#locationDesc").html(
                     detail.wikipedia_extracts
                       ? detail.wikipedia_extracts.html
@@ -79,16 +84,48 @@ function getLocalAttractions(data, map) {
                       ? detail.info.descr
                       : "No description"
                   );
-                  popup.setLngLat(coordinates).setHTML(description).addTo(map);
+                  popup
+                    .setLngLat(coordinates)
+                    .setHTML(
+                      description +
+                        `
+                  <ion-icon class="not-fav" name="heart-outline"></ion-icon>`
+                    )
+                    .addTo(map);
                 } else {
-                  popup.setLngLat(coordinates).setHTML(description).addTo(map);
+                  popup
+                    .setLngLat(coordinates)
+                    .setHTML(
+                      description +
+                        `
+                  <ion-icon class="not-fav" name="heart-outline"></ion-icon>`
+                    )
+                    .addTo(map);
                 }
                 // #locationImg #locationDesc
 
                 // Populate the popup and set its coordinates
                 // based on the feature found.
               });
+          } else {
+            popup
+              .setLngLat(coordinates)
+              .setHTML(
+                description +
+                  `
+            <ion-icon class="not-fav" name="heart-outline"></ion-icon>`
+              )
+              .addTo(map);
           }
+
+          $(".not-fav").click(function () {
+            $(this).replaceWith(
+              "<ion-icon class='fav' name='heart'></ion-icon>"
+            );
+          });
+          $(".fav").click(function () {
+            console.log("why");
+          });
           // Ensure that if the map is zoomed out such that multiple
           // copies of the feature are visible, the popup appears
           // over the copy being pointed to.
@@ -97,6 +134,95 @@ function getLocalAttractions(data, map) {
         map.on("click", function () {
           map.getCanvas().style.cursor = "";
           popup.remove();
+        });
+        map.on("click", "places", function (e) {
+          map.getCanvas().style.cursor = "";
+          popup.remove();
+          $("#locationImg").html("");
+          $("#locationDesc").html("");
+          map.getCanvas().style.cursor = "pointer";
+          console.log(e);
+          let coordinates = e.features[0].geometry.coordinates.slice();
+          let description = e.features[0].properties.name;
+          let details = e.features[0].properties;
+          if (details.wikidata) {
+            const atttractionDetails = `https://api.opentripmap.com/0.1/en/places/xid/${details.wikidata}?apikey=${apikey}`;
+
+            fetch(atttractionDetails)
+              .then(function (response) {
+                return response.json();
+              })
+              .then(function (detail) {
+                console.log(detail);
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                  coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
+
+                if (detail.preview) {
+                  $("#locationImg").html(
+                    `<img src="${detail.preview.source}">`
+                  );
+                  $("#locationDesc").removeClass("hidden");
+                  $("#locationImg").removeClass("hidden");
+
+                  $("#locationDesc").html(
+                    detail.wikipedia_extracts
+                      ? detail.wikipedia_extracts.html
+                      : detail.info
+                      ? detail.info.descr
+                      : "No description"
+                  );
+                  popup
+                    .setLngLat(coordinates)
+                    .setHTML(
+                      description +
+                        `
+                    <ion-icon class="not-fav" name="heart-outline"></ion-icon>`
+                    )
+                    .addTo(map);
+                } else {
+                  popup
+                    .setLngLat(coordinates)
+                    .setHTML(
+                      description +
+                        `
+                  <ion-icon class="not-fav" name="heart-outline"></ion-icon>`
+                    )
+                    .addTo(map);
+                }
+
+                $(".not-fav").click(function () {
+                  $(this).replaceWith(
+                    "<ion-icon class='fav' name='heart'></ion-icon>"
+                  );
+                });
+                $(".fav").click(function () {
+                  console.log("why");
+                });
+                // #locationImg #locationDesc
+
+                // Populate the popup and set its coordinates
+                // based on the feature found.
+              });
+          } else {
+            popup
+              .setLngLat(coordinates)
+              .setHTML(
+                description +
+                  `
+            <ion-icon class="not-fav" name="heart-outline"></ion-icon>`
+              )
+              .addTo(map);
+
+            $(".not-fav").click(function () {
+              $(this).replaceWith(
+                "<ion-icon class='fav' name='heart'></ion-icon>"
+              );
+            });
+            $(".fav").click(function () {
+              console.log("why");
+            });
+          }
         });
       });
     });
