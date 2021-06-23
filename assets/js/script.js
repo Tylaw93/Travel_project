@@ -7,7 +7,7 @@ const apikey = "5ae2e3f221c38a28845f05b63b141ff8b556302ea945abb40cb4ffe1";
 let tempCityName;
 
 /* 6/23/21 MC
-Commented out a asmall block around line 60 - 67, comments left explaining why
+Commented out a asmall block around line 86-95, comments left explaining why
 OTHER OBSERVATIONS
 save something in local storage and go to the fav page, item renders. Click the fav link again, items render, now there are 2. Solution - we should clear all tht innerHTML in #cityCards before generating them again.
 
