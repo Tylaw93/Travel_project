@@ -10,17 +10,36 @@ we need to set #locationImg and #locationDesc .innerHTML("") when beginning sear
 
 
 */
+
+console.log(localStorage);
+renderFavs();
+let cities = [];
 let favorites = [];
 let favors = [new Set(favorites)];
 document.addEventListener("submit", getCityName);
-function saveFavs(city) {
-  localStorage.setItem(city, JSON.stringify(favorites));
+function saveFavs() {
+  localStorage.setItem("Cities", JSON.stringify(cities));
+  localStorage.setItem(tempCityName, JSON.stringify(favorites));
 }
-function loadFavs(city) {
-  localStorage.getItem(city);
-}
-function renderFavs(favorites) {
-  favorites.forEach((city) => {});
+
+function renderFavs() {
+  for (let i = 0; i < localStorage.length - 2; i++) {
+    console.log(i);
+    let city = window.localStorage.key(i);
+    console.log(city);
+    let cityNames = JSON.parse(localStorage.getItem(city));
+    console.log(cityNames);
+    for (let favs = 0; favs < cityNames.length; favs++) {
+      let location = cityNames[favs];
+      let newCard =
+        '<div class="favoriteCard flex flex-col justify-center items-center mt-4 p-4 w-full lg:w-2/5 gap-2 lg:gap-4 bg-gray-400 rounded"><p class="flex self-start">' +
+        city +
+        '</p><div class="flex flex-col justify-center items-start gap-2 p-4 bg-gray-200 rounded w-11/12"><p>' +
+        location +
+        '<span><ion-icon class="fav md hydrated text-red-500 hidden" name="heart" role="img" aria-label="heart"></ion-icon>`</span></p></div><button class="flex self-end">REMOVE</button></div>';
+      $("#cityCards").append(newCard);
+    }
+  }
 }
 
 function favs(name) {
@@ -29,6 +48,7 @@ function favs(name) {
     $(".fav").toggleClass("hidden");
 
     favorites.push(name);
+    saveFavs();
   });
   $(".fav").click(function () {
     $(this).toggleClass("hidden");
@@ -202,7 +222,10 @@ function getLocalAttractions(data, map) {
 function getCityName(params) {
   const cityName = document.querySelector("#city").value;
   tempCityName = cityName;
-  console.log(tempCityName);
+  favorites = [];
+
+  cities.push(tempCityName);
+
   // eslint-disable-next-line no-undef
   const getLatLon = `https://api.opentripmap.com/0.1/en/places/geoname?name=${cityName}&apikey=${apikey}`;
 
@@ -229,6 +252,3 @@ function getCityName(params) {
       getLocalAttractions(data, map);
     });
 }
-localStorage.setItem("favorites", JSON.stringify(favorites));
-let storedNames = JSON.parse(localStorage.favorites);
-console.log(storedNames);
