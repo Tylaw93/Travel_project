@@ -8,8 +8,6 @@ let tempCityName;
 
 /* 6/23/21 MC
 Commented out a asmall block around line 86-95, comments left explaining why
-OTHER OBSERVATIONS
-save something in local storage and go to the fav page, item renders. Click the fav link again, items render, now there are 2. Solution - we should clear all tht innerHTML in #cityCards before generating them again.
 
 */
 
@@ -30,6 +28,7 @@ function saveFavs() {
 }
 
 function renderFavs() {
+  cityCards.innerHTML = "";
   for (let i = 0; i < localStorage.length; i++) {
     console.log(i);
     let city = window.localStorage.key(i);
