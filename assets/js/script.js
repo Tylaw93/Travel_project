@@ -10,17 +10,27 @@ we need to set #locationImg and #locationDesc .innerHTML("") when beginning sear
 
 
 */
+
+console.log(localStorage);
+renderFavs();
+
+let cities = [];
 let favorites = [];
 let favors = [new Set(favorites)];
 document.addEventListener("submit", getCityName);
-function saveFavs(city) {
-  localStorage.setItem(city, JSON.stringify(favorites));
+function saveFavs() {
+  localStorage.setItem(tempCityName, JSON.stringify(favorites));
 }
-function loadFavs(city) {
-  localStorage.getItem(city);
-}
-function renderFavs(favorites) {
-  favorites.forEach((city) => {});
+
+function renderFavs() {
+  for (let i = 0; i < localStorage.length - 2; i++) {
+    console.log(i);
+    let city = localStorage[i];
+    for (let favs = 0; j < city.length; favs++) {
+      let location = city[favs];
+      $("#cityCards").append("");
+    }
+  }
 }
 
 function favs(name) {
@@ -29,6 +39,7 @@ function favs(name) {
     $(".fav").toggleClass("hidden");
 
     favorites.push(name);
+    saveFavs();
   });
   $(".fav").click(function () {
     $(this).toggleClass("hidden");
@@ -202,7 +213,10 @@ function getLocalAttractions(data, map) {
 function getCityName(params) {
   const cityName = document.querySelector("#city").value;
   tempCityName = cityName;
-  console.log(tempCityName);
+  favorites = [];
+
+  cities.push(tempCityName);
+
   // eslint-disable-next-line no-undef
   const getLatLon = `https://api.opentripmap.com/0.1/en/places/geoname?name=${cityName}&apikey=${apikey}`;
 
@@ -229,6 +243,3 @@ function getCityName(params) {
       getLocalAttractions(data, map);
     });
 }
-localStorage.setItem("favorites", JSON.stringify(favorites));
-let storedNames = JSON.parse(localStorage.favorites);
-console.log(storedNames);
