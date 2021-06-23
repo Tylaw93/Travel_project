@@ -19,7 +19,7 @@ searchLink.addEventListener("click", function () {
 
 favLink.addEventListener("click", function () {
   event.preventDefault();
-  console.log("Favorites");
+
   searchPage.classList.add("hidden");
   favPage.classList.remove("hidden");
 });
