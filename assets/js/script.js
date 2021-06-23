@@ -49,8 +49,17 @@ function renderFavs() {
   const delBtn = $(".delete");
   delBtn.click(function () {
     let cityName = $(this).parent().children("p").text();
-    let location = $(this).prev().children("p").text();
-    console.log(location);
+    let locations = $(this).prev().children("p").text();
+
+    let cityChoice = JSON.parse(localStorage.getItem(cityName));
+    let removeLocation = cityChoice.indexOf(locations);
+    cityChoice.splice(removeLocation, 1);
+
+    localStorage.setItem(cityName, JSON.stringify(cityChoice));
+  });
+  searchLink.addEventListener("click", function () {
+    renderFavs();
+    location.reload();
   });
 }
 function favs(name) {
