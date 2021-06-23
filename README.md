@@ -10,25 +10,49 @@
 
 ## Overview
 
-<!-- TODO: Add a screenshot of the live project.
-    1. Link to a 'live demo.'
-    2. Describe your overall experience in a couple of sentences.
-    3. List a few specific technical things that you learned or improved on.
-    4. Share any other tips or guidance for others attempting this or something similar.
- -->
+![rravel application demo 1](./assets/img/museum_hunter_demo.png)
+
+<!--
+Describe your overall experience in a couple of sentences.
+List a few specific technical things that you learned or improved on.
+Share any other tips or guidance for others attempting this or something similar. -->
+
+1. Live demo - https://tylaw93.github.io/Travel_project/
+
+Tyler Lawson
+
+Mike Champion
+Overall this was a great experience, working with someone else for the first time on a collaborative sense. Communicating so that we are on the same page as the project progresses and evaluating our scope as the deadline gets closer. Looking forward to the next project.
+I was able to get more practice with APIs on the weather portion and got deep into the Tailwind documentation more than once.
+Tips and tricks for this type of project? Read the documentation, console.log is your friend, commit early and often.
 
 ### Built With
 
-<!-- TODO: List any MAJOR libraries/frameworks (e.g. React, Tailwind) with links to their homepages. -->
+TailwindCSS - https://tailwindcss.com/
+MomentJS - https://momentjs.com/
+OpenWeatherMap API - https://openweathermap.org/
+Mapbox API - https://www.mapbox.com/
+OpenTripMap API - https://opentripmap.io
 
 ## Features
 
-<!-- TODO: List what specific 'user problems' that this application solves. -->
+A travel and entertainment planning app. You enter a location, either city/state you’ll be travelling through and get back a map of locations in that area, this search will also return a weather forecast for the next week.
 
 ## Contact
 
 <!-- TODO: Include icons and links to your RELEVANT, PROFESSIONAL 'DEV-ORIENTED' social media. LinkedIn and dev.to are minimum. -->
 
+Tyler Lawson
+
+Mike Champion
+https://www.linkedin.com/in/mike-champion-868b8075/
+https://dev.to/mikechampion
+
 ## Acknowledgements
 
 <!-- TODO: List any blog posts, tutorials or plugins that you may have used to complete the project. Only list those that had a significant impact. Obviously, we all 'Google' stuff while working on our things, but maybe something in particular stood out as a 'major contributor' to your skill set for this project. -->
+
+Tyler Lawson
+
+Mike Champion
+I did a bit of Googling during this project, mainly for things that I got 90% of the way there and needed a little hint at the end Tailwind documentation was a big help. I did watch a Tailwind intro from TraversyMedia on YouTube which was great in helping me decide to move on when Bulma was causing a headache.
