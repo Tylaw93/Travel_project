@@ -9,6 +9,12 @@ let tempCityName;
 /* 6/23/21 MC
 Commented out a asmall block around line 86-95, comments left explaining why
 
+TODO
+1. on the search page, clicking a heart to favorite a location should trigger a check to see if that item is already in localStorage, currently you can save a location multiple times
+2. on the fav page, unclicking a heart should remove the item from favorites
+3. on the fav page, clicking delete should delete the entire record for that city
+4. on the fav page, when there are no locations left in a city the empty city should be deleted
+
 */
 
 console.log(localStorage);
