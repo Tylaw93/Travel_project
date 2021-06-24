@@ -10,11 +10,11 @@ let tempCityName;
 Commented out a asmall block around line 86-95, comments left explaining why
 
 TODO
-1. on the search page, clicking a heart to favorite a location should trigger a check to see if that item is already in localStorage, currently you can save a location multiple times
-2. on the fav page, unclicking a heart should remove the item from favorites
+1. on the search page, clicking a heart to favorite a location should trigger a check to see if that item is already in localStorage, currently you can save a location multiple times (this one will likely no longer be an issue once #2 is completed)
+2. on both pages, unclicking a heart should remove the item from favorites
 3. on the fav page, clicking delete should delete the entire record for that city
-4. on the fav page, when there are no locations left in a city the empty city should be deleted
-
+4. on the fav page, when there are no locations left in a city the empty city should be deleted - COMPLETED MC
+5. We need to pull the city from the map fetch, pulling it like we are from the input allows non-capitalization, misspellings, and rendom inputs
 */
 
 console.log(localStorage);
@@ -39,55 +39,62 @@ function renderFavs() {
     console.log(i);
     let city = window.localStorage.key(i);
     console.log(city);
+
     if (city.includes("map") !== true) {
       let cityNames = JSON.parse(localStorage.getItem(city));
-      console.log(cityNames);
-      /* CREATE CITY TILE */
-      const cityTile = document.createElement("div");
-      cityTile.classList.add("favoriteCard");
-      cityTile.classList.add("flex");
-      cityTile.classList.add("flex-col");
-      cityTile.classList.add("justify-center");
-      cityTile.classList.add("items-center");
-      cityTile.classList.add("mt-4");
-      cityTile.classList.add("p-4");
-      cityTile.classList.add("w-full");
-      cityTile.classList.add("lg:w-2/5");
-      cityTile.classList.add("gap-2");
-      cityTile.classList.add("bg-gray-400");
-      cityTile.classList.add("rounded");
-      /* APPEND CITY NAME */
-      const cityName = document.createElement("p");
-      cityName.classList.add("flex");
-      cityName.classList.add("self-start");
-      cityName.innerText = city;
-      cityTile.append(cityName);
-      /* CREATE LOCATION LIST DIV */
-      const locationDiv = document.createElement("div");
-      locationDiv.classList.add("flex");
-      locationDiv.classList.add("flex-col");
-      locationDiv.classList.add("justify-center");
-      locationDiv.classList.add("items-start");
-      locationDiv.classList.add("gap-2");
-      locationDiv.classList.add("p-4");
-      locationDiv.classList.add("bg-gray-200");
-      locationDiv.classList.add("rounded");
-      locationDiv.classList.add("w-11/12");
-      /* LOOP THROUGH CITY LOCATIONS */
-      for (let favs = 0; favs < cityNames.length; favs++) {
-        const location = document.createElement("p");
-        location.innerHTML = `${cityNames[favs]} <span><ion-icon class="fav md hydrated text-red-500 " name="heart" role="img" aria-label="heart"></ion-icon></span>`;
-        locationDiv.append(location);
+      console.log(typeof cityNames.length);
+      if (cityNames.length > 0) {
+        console.log(cityNames);
+        /* CREATE CITY TILE */
+        const cityTile = document.createElement("div");
+        cityTile.classList.add("favoriteCard");
+        cityTile.classList.add("flex");
+        cityTile.classList.add("flex-col");
+        cityTile.classList.add("justify-center");
+        cityTile.classList.add("items-center");
+        cityTile.classList.add("mt-4");
+        cityTile.classList.add("p-4");
+        cityTile.classList.add("w-full");
+        cityTile.classList.add("lg:w-2/5");
+        cityTile.classList.add("gap-2");
+        cityTile.classList.add("bg-gray-400");
+        cityTile.classList.add("rounded");
+        /* APPEND CITY NAME */
+        const cityName = document.createElement("p");
+        cityName.classList.add("flex");
+        cityName.classList.add("self-start");
+        cityName.innerText = city;
+        cityTile.append(cityName);
+        /* CREATE LOCATION LIST DIV */
+        const locationDiv = document.createElement("div");
+        locationDiv.classList.add("flex");
+        locationDiv.classList.add("flex-col");
+        locationDiv.classList.add("justify-center");
+        locationDiv.classList.add("items-start");
+        locationDiv.classList.add("gap-2");
+        locationDiv.classList.add("p-4");
+        locationDiv.classList.add("bg-gray-200");
+        locationDiv.classList.add("rounded");
+        locationDiv.classList.add("w-11/12");
+        /* LOOP THROUGH CITY LOCATIONS */
+        for (let favs = 0; favs < cityNames.length; favs++) {
+          const location = document.createElement("p");
+          location.innerHTML = `${cityNames[favs]} <span><ion-icon class="fav md hydrated text-red-500 " name="heart" role="img" aria-label="heart"></ion-icon></span>`;
+          locationDiv.append(location);
+        }
+        cityTile.append(locationDiv);
+        const button = document.createElement("button");
+        button.classList.add("flex");
+        button.classList.add("self-end");
+        button.classList.add("delete");
+        button.innerText = "DELETE";
+        cityTile.append(button);
+        cityCards.append(cityTile);
+      } else {
+        // do nothing
       }
-      cityTile.append(locationDiv);
-      const button = document.createElement("button");
-      button.classList.add("flex");
-      button.classList.add("self-end");
-      button.classList.add("delete");
-      button.innerText = "DELETE";
-      cityTile.append(button);
-      cityCards.append(cityTile);
     }
+
     /* commented out so I can play with it above - MC
       for (let favs = 0; favs < cityNames.length; favs++) {
         let location = cityNames[favs];
