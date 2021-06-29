@@ -7,14 +7,18 @@ const apikey = "5ae2e3f221c38a28845f05b63b141ff8b556302ea945abb40cb4ffe1";
 let tempCityName;
 
 /* 6/23/21 MC
-Commented out a asmall block around line 86-95, comments left explaining why
+Commented out a a small block around line 86-95, comments left explaining why
 
 TODO
 1. on the search page, clicking a heart to favorite a location should trigger a check to see if that item is already in localStorage, currently you can save a location multiple times (this one will likely no longer be an issue once #2 is completed)
+TODO
 2. on both pages, unclicking a heart should remove the item from favorites
+TODO
 3. on the fav page, clicking delete should delete the entire record for that city
+TO DONE
 4. on the fav page, when there are no locations left in a city the empty city should be deleted - COMPLETED MC
-5. We need to pull the city from the map fetch, pulling it like we are from the input allows non-capitalization, misspellings, and rendom inputs
+TODO
+5. We need to pull the city from the map fetch, pulling it like we are from the input allows non-capitalization, misspellings, and random inputs
 */
 
 console.log(localStorage);
