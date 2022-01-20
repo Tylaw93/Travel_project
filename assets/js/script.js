@@ -193,8 +193,8 @@ function getLocalAttractions(data, map) {
           let coordinates = e.features[0].geometry.coordinates.slice();
           let description = e.features[0].properties.name;
           let details = e.features[0].properties;
-          if (details.wikidata) {
-            const atttractionDetails = `https://api.opentripmap.com/0.1/en/places/xid/${details.wikidata}?apikey=${apikey}`;
+          if (details.xid) {
+            const atttractionDetails = `https://api.opentripmap.com/0.1/en/places/xid/${details.xid}?apikey=${apikey}`;
 
             fetch(atttractionDetails)
               .then(function (response) {
