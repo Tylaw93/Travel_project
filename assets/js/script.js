@@ -5,16 +5,27 @@ const apikey = "5ae2e3f221c38a28845f05b63b141ff8b556302ea945abb40cb4ffe1";
 // eslint-disable-next-line no-undef
 // const cityName = "St. Louis";
 let tempCityName;
-/*
-we need to set #locationImg and #locationDesc .innerHTML("") when beginning search begins so that a new city search clears results from the previous city
 
+/* 6/23/21 MC
+Commented out a a small block around line 86-95, comments left explaining why
 
+TODO
+1. on the search page, clicking a heart to favorite a location should trigger a check to see if that item is already in localStorage, currently you can save a location multiple times (this one will likely no longer be an issue once #2 is completed)
+TODO
+2. on both pages, unclicking a heart should remove the item from favorites
+TODO
+3. on the fav page, clicking delete should delete the entire record for that city
+TO DONE
+4. on the fav page, when there are no locations left in a city the empty city should be deleted - COMPLETED MC
+TODO
+5. We need to pull the city from the map fetch, pulling it like we are from the input allows non-capitalization, misspellings, and random inputs
 */
 
 console.log(localStorage);
 
 favLink.addEventListener("click", function () {
-  event.preventDefault();
+  // event.preventDefault();
+  // location.reload();
   renderFavs();
 });
 
@@ -27,24 +38,79 @@ function saveFavs() {
 }
 
 function renderFavs() {
+  cityCards.innerHTML = "";
   for (let i = 0; i < localStorage.length; i++) {
     console.log(i);
     let city = window.localStorage.key(i);
     console.log(city);
+
     if (city.includes("map") !== true) {
       let cityNames = JSON.parse(localStorage.getItem(city));
-      console.log(cityNames);
+      console.log(typeof cityNames.length);
+      if (cityNames.length > 0) {
+        console.log(cityNames);
+        /* CREATE CITY TILE */
+        const cityTile = document.createElement("div");
+        cityTile.classList.add("favoriteCard");
+        cityTile.classList.add("flex");
+        cityTile.classList.add("flex-col");
+        cityTile.classList.add("justify-center");
+        cityTile.classList.add("items-center");
+        cityTile.classList.add("mt-4");
+        cityTile.classList.add("p-4");
+        cityTile.classList.add("w-full");
+        cityTile.classList.add("lg:w-2/5");
+        cityTile.classList.add("gap-2");
+        cityTile.classList.add("bg-gray-400");
+        cityTile.classList.add("rounded");
+        /* APPEND CITY NAME */
+        const cityName = document.createElement("p");
+        cityName.classList.add("flex");
+        cityName.classList.add("self-start");
+        cityName.innerText = city;
+        cityTile.append(cityName);
+        /* CREATE LOCATION LIST DIV */
+        const locationDiv = document.createElement("div");
+        locationDiv.classList.add("flex");
+        locationDiv.classList.add("flex-col");
+        locationDiv.classList.add("justify-center");
+        locationDiv.classList.add("items-start");
+        locationDiv.classList.add("gap-2");
+        locationDiv.classList.add("p-4");
+        locationDiv.classList.add("bg-gray-200");
+        locationDiv.classList.add("rounded");
+        locationDiv.classList.add("w-11/12");
+        /* LOOP THROUGH CITY LOCATIONS */
+        for (let favs = 0; favs < cityNames.length; favs++) {
+          const location = document.createElement("p");
+          location.innerHTML = `${cityNames[favs]} <span><ion-icon class="fav md hydrated text-red-500 " name="heart" role="img" aria-label="heart"></ion-icon></span>`;
+          locationDiv.append(location);
+        }
+        cityTile.append(locationDiv);
+        const button = document.createElement("button");
+        button.classList.add("flex");
+        button.classList.add("self-end");
+        button.classList.add("delete");
+        button.innerText = "DELETE";
+        cityTile.append(button);
+        cityCards.append(cityTile);
+      } else {
+        // do nothing
+      }
+    }
+
+    /* commented out so I can play with it above - MC
       for (let favs = 0; favs < cityNames.length; favs++) {
         let location = cityNames[favs];
         let newCard =
-          '<div class="favoriteCard flex flex-col justify-center items-center mt-4 p-4 w-full lg:w-4/5 gap-2 lg:gap-4 xl:w-4/5 bg-gray-400 rounded"><p class="flex self-start">' +
+          '<div class="favoriteCard flex flex-col justify-center items-center mt-4 p-4 w-full lg:w-2/5 gap-2 bg-gray-400 rounded"><p class="flex self-start">' +
           city +
           '</p><div class="flex flex-col justify-center items-start gap-2 p-4 bg-gray-200 rounded w-11/12"><p>' +
           location +
           '<span><ion-icon class="fav md hydrated text-red-500 " name="heart" role="img" aria-label="heart"></ion-icon></span></p></div><button class="flex self-end delete" >REMOVE</button></div>';
         $("#cityCards").append(newCard);
       }
-    }
+    } */
   }
   const delBtn = $(".delete");
   delBtn.click(function () {
@@ -57,11 +123,16 @@ function renderFavs() {
 
     localStorage.setItem(cityName, JSON.stringify(cityChoice));
   });
+  /*
   searchLink.addEventListener("click", function () {
     renderFavs();
+      - commmented out because this doesn't need to render when clicking the search link, it was adding tiles to the fav page
     location.reload();
+      - commented out because when moving from the fav page back to the search page it was reloading the page, so that you need to re-run the search. You should be able to visit the favorites and back without reloading
   });
+  */
 }
+
 function favs(name) {
   $(".not-fav").click(function () {
     $(this).toggleClass("hidden");
